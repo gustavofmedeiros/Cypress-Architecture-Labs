@@ -1,0 +1,24 @@
+{
+  "name": "cypress-archicteture-labs",
+  "version": "1.0.0",
+  "description": "Meu laboratório de estudos em Cypress. Aqui exploro arquiteturas modernas, focando em manutenção, organização e testes robustos para um projeto de demonstração.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavofmedeiros/Cypress-Archicteture-labs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gustavofmedeiros/Cypress-Archicteture-labs/issues"
+  },
+  "homepage": "https://github.com/gustavofmedeiros/Cypress-Archicteture-labs#readme",
+  "devDependencies": {
+    "cypress": "^15.10.0"
+  }
+}
