@@ -1,7 +1,11 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  allowCypressEnv: false,
+  allowCypressEnv: true,
+  env: {
+    uiBaseUrl: 'https://demoqa.com',
+    apiBaseUrl: 'https://bookstore.toolsqa.com'
+  },
 
   e2e: {
     setupNodeEvents(on, config) {
