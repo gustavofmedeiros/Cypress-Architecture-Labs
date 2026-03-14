@@ -2,20 +2,18 @@
   Login.cy.js: Cenários de autenticação com sucesso e falha  no módulo Bookstore para o site DemoQA.
 */
 
+import users from '../../fixtures/users.json'
+
 describe('Login - Bookstore', () => {
 
-  // Pré-condições: carrega usuários da fixture e garante que cada teste inicia na página de login.
-  beforeEach(function () {
-    cy.fixture('users').then((users) => {
-      this.users = users
-    })
+  // Pré-condições: garante que cada teste inicia na página de login.
+  beforeEach(() => {
     cy.visit(Cypress.env('uiBaseUrl') + '/login')
-
   })
 
   // Cenário de sucesso: login com credenciais válidas deve direcionar para a área logada.  
-  it('deve logar com usuário válido', function () {
-    const user = this.users.validUser
+  it('deve logar com usuário válido', () => {
+    const user = users.validUser
 
     cy.login(user)
     cy.get('#userName-value')
@@ -27,8 +25,8 @@ describe('Login - Bookstore', () => {
   })
 
   // Cenário de falha: senha incorreta deve exibir mensagem de erro e não mostrar área logada.
-  it('deve exibir mensagem de erro para senha incorreta', function () {
-    const user = this.users.validUserWrongPassword
+  it('deve exibir mensagem de erro para senha incorreta', () => {
+    const user = users.validUserWrongPassword
     cy.login(user)
     cy.get('#name')
       .should('be.visible')
@@ -43,8 +41,8 @@ describe('Login - Bookstore', () => {
      para usuário inexistente e senha incorreta, e para garantir que,
      mesmo assim, o usuário não é autenticado (sem nome de usuário e sem botão de logout).
       */
-  it('deve exibir mensagem de erro para usuário inexistente', function () {
-    const user = this.users.nonExistingUser
+  it('deve exibir mensagem de erro para usuário inexistente', () => {
+    const user = users.nonExistingUser
     cy.login(user)
     cy.get('#name')
       .should('be.visible')

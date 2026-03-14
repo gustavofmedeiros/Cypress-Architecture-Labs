@@ -27,3 +27,21 @@ Cypress.Commands.add('createUserApi', (user) => {
     bodyRequest
   );
 });
+
+/*
+  Comando para autenticar um usuário via API e obter o token de acesso.
+  Recebe um objeto user com os dados necessários para autenticação.
+  Dados obrigatórios: userName, password.  
+  */
+ Cypress.Commands.add ('loginUserApi', (user) => {
+  const bodyRequest = {
+    userName: user.userName,
+    password: user.password,
+  };
+
+return cy.request(
+  'POST',
+  Cypress.env('apiBaseUrl') + '/Account/v1/GenerateToken',
+  bodyRequest
+);
+})
