@@ -8,6 +8,7 @@
 */
 
 import users from '../../fixtures/users.json'
+import { generateTestPassword } from '../../support/utils/password'
 
 describe('API User Registration - DemoQA Book Store', () => {
 
@@ -15,13 +16,15 @@ describe('API User Registration - DemoQA Book Store', () => {
   Registra usuário novo via POST /Account/v1/User.
   
   Este teste gera userName único com timestamp para evitar duplicidade na massa de dados.
+  A senha é gerada via helper para manter o padrão exigido pela API e permitir reuso.
   O comando customizado createUserApi é responsável pela requisição, 
   enquanto o cenário de teste valida apenas status e resposta da API.
 */
   it('deve registrar um novo usuário com dados válidos', () => {
+    const password = generateTestPassword()
     const user = {
       userName: 'usuarioteste' + Date.now(),
-      password: 'Teste@1357'
+      password
     }
 
     cy.createUserApi(user).then((response) => {
@@ -38,12 +41,7 @@ describe('API User Registration - DemoQA Book Store', () => {
   it('não deve cadastrar usuário duplicado', () => {
     const user = users.validUser;
 
-    cy.request({
-      method: 'POST',
-      url: 'https://demoqa.com/Account/v1/User',
-      body: user,
-      failOnStatusCode: false,
-    }).then((response) => {
+    cy.createUserApi(user).then((response) => {
       expect(response.status).to.eq(406);
       expect(response.body.code).to.eq('1204');
       expect(response.body.message).to.eq('User exists!');
